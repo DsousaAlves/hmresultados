@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://ultraq.net.nz/thymeleaf/layout">
+	
+	
+<nav class="navbar navbar-default navbar-static-top">
+ 
+    <div class="container-fluid ">
+ 
+        <!-- Menu Inicio -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#exemplo-navbar-collapse" aria-expanded="false">
+ 
+                <span class="sr-only">Navegacao</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+ 
+            </button>
+ 
+            <!-- Título Direita do menu-->
+            <a class="navbar-brand" href="#" target="_blank"><img alt="Brand"
+					th:src="@{/images/hm_logo.png}" /></a>
+ 
+        </div>
+        <!-- Menu Fim -->
+         
+        <div class="collapse navbar-collapse" id="exemplo-navbar-collapse">
+ 
+            <!-- Links Inicio -->
+            <ul class="nav navbar-nav navbar-right">
+ 
+                <li><a  th:href="@{/resultados}">Pesquisa de exames</a></li>
+                <li><a  th:href="@{/resultados/cadastro}">Cadastro de exames</a></li>
+                <li><a  data-toggle="modal" data-target="#arquivoresultadomodal">Lançar resultados para o arquivo</a></li>                
+ 
+            </ul>
+            <!-- Links Fim -->
+ 
+           
+        </div>
+    </div>
+ 	
+</nav>
+</html>

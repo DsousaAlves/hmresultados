@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layoutpadrao">
+<head>
+	<title>Cadastro de resultado</title>
+</head>
+
+<section layout:fragment="conteudo">
+	<form class="form-horizontal" method="POST" th:object="${resultado}"
+		th:action="@{/resultados/cadastro}">
+
+		<div layout:include="messagens"></div>
+
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="hm-titulo-panel">Cadastro de exame</h3>
+				
+			</div>
+			<div class="panel-body">
+				<input type="hidden" th:field="*{id}" />
+				<div class="form-group" th:classappend="${#fields.hasErrors('paciente')} ? has-error"> 
+					<label for="inputNome" class="col-sm-2 control-label">Nome
+						do paciente</label>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" id="inputNome"
+							th:field="*{paciente}" />
+					</div>
+				</div>
+				<div class="form-group" th:classappend="${#fields.hasErrors('exame')} ? has-error">
+					<label for="inputExame" class="col-sm-2 control-label">Exame</label>
+					<div class="col-sm-2">
+						<input type="text" class="form-control" id="inputExame"
+							th:field="*{exame}" list="listaestilos" autocomplete="off" />
+						<datalist id="listaestilos">
+							<option th:each="exames : ${todosExames}" th:value="${exames.descricao}" 
+											></option>				
+						</datalist>
+
+					</div>
+				</div>
+				<div class="form-group" th:classappend="${#fields.hasErrors('dataExame')} ? has-error">
+					<label for="inputDtExame" class="col-sm-2 control-label">Data
+						do exame</label>
+					<div class="col-sm-2">
+
+						<div class="input-group date" >
+							<input type="text" class="form-control datepicker"
+								id="inputDtExame" th:field="*{dataExame}" />
+							<div class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="inputDtExameEntrega" class="col-sm-2 control-label">Data
+						da entrega</label>
+					<div class="col-sm-2">
+						<div class="input-group date">
+							<input type="text" class="form-control datepicker"
+								id="inputDtExameEntrega" th:field="*{dataEntrega}" />
+							<div class="input-group-addon">
+								<span class="glyphicon glyphicon-calendar"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="status" class="col-sm-2 control-label">Status</label>
+					<div class="col-sm-2">
+						<select class="form-control" th:field="*{status}">
+							<option th:each="status : ${todosStatus}" th:value="${status}" th:text="${status.desc}"></option>
+                    	</select>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-2">
+						<button type="submit" class="btn btn-default btn-primary">Salvar</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</form>
+
+ </section>
+
+	
+	
+
+</html>

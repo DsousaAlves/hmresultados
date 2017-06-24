@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+	
+	<title>Resultados de Exames</title>
+	<link rel="stylesheet" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="/css/bootstrap-datepicker.min.css" />
+	<link rel="stylesheet" href="/css/style.css" />
+	
+	
+</head>
+<body>
+	
+	<header layout:include="cabecalho"></header>
+	
+	<section layout:fragment="conteudo" >
+		<p>Conteúdo principal</p>
+	</section>
+	<div  layout:include="arquivoresultado"></div>
+<script src="/js/jquery.min.js"></script>
+	<script src="/js/bootstrap-datepicker.min.js"></script>
+	<script src="/js/bootstrap-datepicker.pt-BR.min.js"></script>
+	<script src="/js/resultados.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+
+</body>
+</html>	
+	

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://ultraq.net.nz/thymeleaf/layout">
+
+<div class="modal fade" id="arquivoresultadomodal" tabindex="-1"
+	data-keyboard="false" data-backdrop="static">
+	<div class="modal-dialog">
+		<form th:action="@{/resultados/arquivar}" method="POST">
+			<input type="hidden" name="_method" value="DELETE" />
+
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Lançar resultados de exames para
+						arquivo</h4>
+				</div>
+
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="mesRef" class="col-sm-4 control-label">Mês de referência</label>
+						<div class="col-sm-offset-2">
+
+							<div class="input-group date">
+								<input type="text" class="form-control datepicker mesRef" name="mesRef" id="mesRef" />
+								<div class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Lançar</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+</html>
