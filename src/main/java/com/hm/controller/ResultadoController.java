@@ -1,14 +1,9 @@
 package com.hm.controller;
 
-import java.io.File;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.hibernate.loader.custom.Return;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -19,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView;
 
 import com.hm.model.Exame;
 import com.hm.model.Resultado;
@@ -27,13 +21,13 @@ import com.hm.model.Status;
 import com.hm.repository.IExames;
 import com.hm.repository.filter.ResultadoFilter;
 import com.hm.service.ResultadoService;
+import com.hm.util.RelatorioUtil;
 
 @Controller
 @RequestMapping("/resultados")
 public class ResultadoController {
 
-	@Autowired
-	private ApplicationContext appContext;
+
 	
 	@Autowired
 	private IExames exames;
@@ -41,17 +35,7 @@ public class ResultadoController {
 	@Autowired
 	private ResultadoService resultadoService;
 	
-	@RequestMapping(path = "/pdf", method = RequestMethod.GET)
-	public ModelAndView gerarPdf(){
-		JasperReportsPdfView view = new JasperReportsPdfView();
-		view.setUrl("classpath:relatorios"+File.separator+"resultados_arquivo.jrxml");
-		view.setApplicationContext(appContext);
-		Map<String, Object> params = new HashMap<>();
 	
-		//params.put("datasource", resultadoService.buscaResultados(new ResultadoFilter()));
-		
-		return new ModelAndView(view);
-	}
 	
 	
 	//Home
@@ -83,6 +67,14 @@ public class ResultadoController {
 		resultadoService.lancarResultadosArquivo(mesRef);
 		return "redirect:/resultados";
 	} 
+	
+	@RequestMapping(path = "/pdf", method = RequestMethod.GET)
+	public ModelAndView gerarPdf(){
+		RelatorioUtil u = new RelatorioUtil();
+		u.geraRelatorio(null, null, null);
+		
+		return new ModelAndView("index");
+	}
 
 	@RequestMapping(value = "/cadastro", method = RequestMethod.POST)
 	public String cadastro(@Validated Resultado resultado, Errors errors,RedirectAttributes attributes) {
