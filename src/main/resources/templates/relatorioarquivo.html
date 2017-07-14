@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://ultraq.net.nz/thymeleaf/layout">
+
+<div class="modal fade" id="relatorioarquivomodal" tabindex="-1"
+	data-keyboard="false" data-backdrop="static">
+	<div class="modal-dialog">
+		<form th:action="@{/relatorio}" method="POST">
+			
+
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">Gerar lista de resultados que estão no
+						arquivo</h4>
+				</div>
+
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="mesRef" class="col-sm-4 control-label">Mês de referência</label>
+						<div class="col-sm-offset-2">
+
+							<div class="input-group date">
+								<input required="required" type="text" class="form-control datepicker mesRef" name="mesRef" id="mesRef" />
+								<div class="input-group-addon">
+									<span class="glyphicon glyphicon-calendar"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer">
+					<button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
+					<button type="submit" class="btn btn-primary">Confirmar</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+</html>

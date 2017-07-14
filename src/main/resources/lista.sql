@@ -1,0 +1,17 @@
+insert into exame (descricao) values ('TCAR');
+insert into exame (descricao) values ('TÓRAX');
+insert into exame (descricao) values ('ANGIOTC DO TÓRAX - TEP');
+insert into exame (descricao) values ('ANGIOTC');
+insert into exame (descricao) values ('ABDOME');
+insert into exame (descricao) values ('ABDOME E PELVE');
+insert into exame (descricao) values ('CRÂNIO');
+insert into exame (descricao) values ('ARTICULAÇÕES');
+insert into exame (descricao) values ('PELVE');
+insert into exame (descricao) values ('COLUNA CERVICAL');
+insert into exame (descricao) values ('COLUNA LOMBAR');
+insert into exame (descricao) values ('COLUNA LOMBOSSACRA');
+insert into exame (descricao) values ('COLUNA TORÁCICA');
+insert into exame (descricao) values ('SELA TURCICA');
+insert into exame (descricao) values ('APARELHO URINÁRIO');
+insert into exame (descricao) values ('PESCOÇO');
+insert into exame (descricao) values ('SEIOS DA FACE');
