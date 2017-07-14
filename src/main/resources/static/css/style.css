@@ -4,6 +4,10 @@
 		margin-right: 15px;
 		margin-left: 15px;
 	}
+	.hm-nav-top{
+		margin-right: 0;
+		margin-left:0;
+	}
 	.alert {
 		margin-left: 15px;
 		margin-right: 15px;
@@ -30,4 +34,7 @@
 .hm-form {
 	margin-left: 15px;
 	margin-right: 15px;
+}
+.hm-mouse-hover:hover{
+	cursor : pointer;
 }

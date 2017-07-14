@@ -8,10 +8,10 @@
     <meta name="viewport" content="width=device-width" />
 	
 	<title>Resultados de Exames</title>
-	<link rel="stylesheet" href="/css/bootstrap.min.css" />
-	<link rel="stylesheet" href="/css/bootstrap-datepicker.min.css" />
-	<link rel="stylesheet" href="/css/style.css" />
-	
+	<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{/css/bootstrap-datepicker.min.css}" />
+	<link rel="stylesheet" th:href="@{/css/style.css}" />
+	<link rel="icon" th:href="@{/images/icon.png}" type="image/gif" sizes="16x16" />
 	
 </head>
 <body>
@@ -22,11 +22,12 @@
 		<p>Conteúdo principal</p>
 	</section>
 	<div  layout:include="arquivoresultado"></div>
-<script src="/js/jquery.min.js"></script>
-	<script src="/js/bootstrap-datepicker.min.js"></script>
-	<script src="/js/bootstrap-datepicker.pt-BR.min.js"></script>
-	<script src="/js/resultados.js"></script>
-<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+	<div  layout:include="relatorioarquivo"></div>
+<script th:src="@{/js/jquery.min.js}"></script>
+	<script th:src="@{/js/bootstrap-datepicker.min.js}"></script>
+	<script th:src="@{/js/bootstrap-datepicker.pt-BR.min.js}"></script>
+	<script th:src="@{/js/resultados.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
 
 </body>
 </html>	

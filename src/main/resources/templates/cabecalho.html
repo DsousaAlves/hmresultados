@@ -4,7 +4,7 @@
 	xmlns:layout="http://ultraq.net.nz/thymeleaf/layout">
 	
 	
-<nav class="navbar navbar-default navbar-static-top">
+<nav class="navbar hm-nav-top navbar-default navbar-static-top">
  
     <div class="container-fluid ">
  
@@ -16,11 +16,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
- 
+  
             </button>
  
             <!-- Título Direita do menu-->
-            <a class="navbar-brand" href="#" target="_blank"><img alt="Brand"
+            <a class="navbar-brand" href="#"><img alt="Brand"
 					th:src="@{/images/hm_logo.png}" /></a>
  
         </div>
@@ -31,10 +31,19 @@
             <!-- Links Inicio -->
             <ul class="nav navbar-nav navbar-right">
  
-                <li><a  th:href="@{/resultados}">Pesquisa de exames</a></li>
-                <li><a  th:href="@{/resultados/cadastro}">Cadastro de exames</a></li>
-                <li><a  th:href="@{/resultados/pdf}">Exames arquivados</a></li>
-                <li><a  data-toggle="modal" data-target="#arquivoresultadomodal">Lançar resultados para o arquivo</a></li>                
+                <li><a  title="Página inicial com a lista de resultados" rel="tooltip" data-placement="bottom"
+                		th:href="@{/resultados}">Pesquisa de exames</a></li>
+                		
+                <li><a	title="Cadastrar um novo resultado" rel="tooltip" data-placement="bottom" 
+                	 th:href="@{/resultados/cadastro}">Cadastro de exames</a></li>
+              
+                <li>
+               			 <a title="Gerar lista de resultados que estão no arquivo" rel="tooltip" data-placement="bottom" 
+               			 	class="hm-mouse-hover" data-toggle="modal" data-target="#relatorioarquivomodal">Exames arquivados</a>
+                </li>
+                <li><a title="Lançar resultados para arquivo" rel="tooltip" data-placement="bottom"
+                	class="hm-mouse-hover" data-toggle="modal" data-target="#arquivoresultadomodal">
+                		Lançar resultados para o arquivo</a></li>                
  
             </ul>
             <!-- Links Fim -->

@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -21,7 +22,7 @@ import com.hm.model.Status;
 import com.hm.repository.IExames;
 import com.hm.repository.filter.ResultadoFilter;
 import com.hm.service.ResultadoService;
-import com.hm.util.RelatorioUtil;
+import com.hm.util.PageWrapper;
 
 @Controller
 @RequestMapping("/resultados")
@@ -40,9 +41,14 @@ public class ResultadoController {
 	
 	//Home
 	@RequestMapping()
-	public ModelAndView home(@ModelAttribute("filter") ResultadoFilter filter) {
+	public ModelAndView home(@ModelAttribute("filter") ResultadoFilter filter,Pageable pagina) {
 		ModelAndView mv = new ModelAndView("index");
-		mv.addObject("todosResultados", resultadoService.buscaResultados(filter));
+		System.out.println(pagina.getPageNumber());
+		//Page<Resultado> resultados = resultadoService.buscaResultados(filter,pagina);
+		 PageWrapper<Resultado> resultados = new PageWrapper<>
+     	(resultadoService.buscaResultados(filter, pagina), "/resultados");
+		mv.addObject("page", resultados);
+		mv.addObject("todosResultados", resultados.getContent());
 		return mv;
 	}
 	
@@ -62,19 +68,22 @@ public class ResultadoController {
 	}
 	
 	@RequestMapping("/arquivar")
-	public String lancarResultadosArquivo(String mesRef){
+	public String lancarResultadosArquivo(String mesRef, RedirectAttributes attributes){
+	
 		
-		resultadoService.lancarResultadosArquivo(mesRef);
+		if(mesRef.trim().isEmpty() || mesRef == null){
+			return "redirect:/resultados";
+		}
+		
+		
+		if(resultadoService.lancarResultadosArquivo(mesRef) > 0){	
+			attributes.addFlashAttribute("mensagem", "Registros enviados para arquivo!");
+		}else{
+			attributes.addFlashAttribute("mensagem", "Não houve registros enviados para arquivo!");
+		}
 		return "redirect:/resultados";
 	} 
-	
-	@RequestMapping(path = "/pdf", method = RequestMethod.GET)
-	public ModelAndView gerarPdf(){
-		RelatorioUtil u = new RelatorioUtil();
-		u.geraRelatorio(null, null, null);
-		
-		return new ModelAndView("index");
-	}
+
 
 	@RequestMapping(value = "/cadastro", method = RequestMethod.POST)
 	public String cadastro(@Validated Resultado resultado, Errors errors,RedirectAttributes attributes) {

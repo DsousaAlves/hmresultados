@@ -1,19 +1,17 @@
 package com.hm.service;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
 import com.hm.model.Resultado;
 import com.hm.model.Status;
 import com.hm.repository.IResultados;
 import com.hm.repository.filter.ResultadoFilter;
+import com.hm.util.DataUtil;
 
 @Service
 public class ResultadoService {
@@ -40,19 +38,18 @@ public class ResultadoService {
 		return e;
 	}
 	
-	public List<Resultado> buscaResultados(ResultadoFilter filter){
+	public Page<Resultado> buscaResultados(ResultadoFilter filter,Pageable pagina){
 
 		String nomePaciente = filter.getNomePaciente() == null ? "%" : filter.getNomePaciente();
 		
-		return resultados.findByPacienteContaining(nomePaciente);
+		
+		Page<Resultado> findByPacienteContaining = (Page<Resultado>) resultados.findByPacienteContaining(nomePaciente, pagina);
+		return findByPacienteContaining;
 	}
 	
-	public void lancarResultadosArquivo(String mesRef){
-		String aux[] = mesRef.split("/");
-		Calendar c = new GregorianCalendar(Integer.parseInt(aux[1]), Integer.parseInt(aux[0]) - 1, 1);
-//		System.out.println("----->>>>>>>>>>>>>>> "+c.get(Calendar.MONTH) + " " + c.getActualMaximum(Calendar.DAY_OF_MONTH) );
-		
-		resultados.lancarResultadosArquivos(aux[1]+"/"+aux[0]+"/"+c.getActualMinimum(Calendar.DAY_OF_MONTH),//data inicio 
-											aux[1]+"/"+aux[0]+"/"+c.getActualMaximum(Calendar.DAY_OF_MONTH));//data fim
+	public int lancarResultadosArquivo(String mesRef){
+
+		return resultados.lancarResultadosArquivos(DataUtil.extrairData(mesRef)[0],//data inicio 
+													DataUtil.extrairData(mesRef)[1]);//data fim
 	}
 }

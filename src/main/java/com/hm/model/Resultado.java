@@ -24,7 +24,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Entity
 @NamedStoredProcedureQuery(name = "arquivoProcedure", procedureName = "lancar_resultados_arquivo", parameters = {
 		@StoredProcedureParameter(mode = ParameterMode.IN, name = "data_inicio", type = String.class),
-		@StoredProcedureParameter(mode = ParameterMode.IN, name = "data_fim", type = String.class) })
+		@StoredProcedureParameter(mode = ParameterMode.IN, name = "data_fim", type = String.class),
+		@StoredProcedureParameter(mode = ParameterMode.OUT, name = "qtd", type = Integer.class)})
 public class Resultado implements Serializable {
 
 	@Transient
@@ -66,7 +67,7 @@ public class Resultado implements Serializable {
 	}
 
 	public void setPaciente(String paciente) {
-		this.paciente = paciente.toUpperCase();
+		this.paciente = paciente.toUpperCase().trim();
 	}
 
 	public Date getDataExame() {

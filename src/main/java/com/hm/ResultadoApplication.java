@@ -1,12 +1,14 @@
 package com.hm;
 
-import java.util.Locale;
-
+import java.util.List;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.servlet.LocaleResolver;
-import org.springframework.web.servlet.i18n.FixedLocaleResolver;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
+import org.springframework.web.method.support.HandlerMethodArgumentResolver;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @SpringBootApplication
 public class ResultadoApplication {
@@ -15,8 +17,22 @@ public class ResultadoApplication {
 		SpringApplication.run(ResultadoApplication.class, args);
 	}
 
-	@Bean
-	public LocaleResolver localeResolver() {
-		return new FixedLocaleResolver(new Locale("pt", "BR"));
+	@Configuration
+	public static class MvcConfig extends WebMvcConfigurerAdapter {
+
+		@Override
+		public void addViewControllers(ViewControllerRegistry registry) {
+			registry.addRedirectViewController("/", "/resultados");
+		}
+
+		@Override
+		public void addArgumentResolvers(List<HandlerMethodArgumentResolver> argumentResolvers) {
+			PageableHandlerMethodArgumentResolver resolver = new PageableHandlerMethodArgumentResolver();
+			resolver.setFallbackPageable(new PageRequest(0, 10));
+
+			argumentResolvers.add(resolver);
+			super.addArgumentResolvers(argumentResolvers);
+		}
+
 	}
 }
